@@ -14,10 +14,10 @@ public class Task1 {
      */
     public List<Character> listAllCharacters(String stringToList){
         if (stringToList == null){
-            return null;
+            return new ArrayList<>(); // Return new list
         }
         List<Character> characterList = new ArrayList<>();
-        for(int i=1; i<stringToList.toCharArray().length;i++){
+        for(int i=0; i<stringToList.toCharArray().length;i++){
             characterList.add(stringToList.toCharArray()[i]);
         }
         return characterList;
@@ -29,18 +29,22 @@ public class Task1 {
      * @param concat String to surround base string
      * @return String with base surrounded by two Strings. Should not return null.
      */
-    public String concatenateToFrontAndEnd(String baseString, String concat){
-        return baseString+concat;
+    public String concatenateToFrontAndEnd(String baseString, String concat) {
+        if (concat == null) {
+            return ""; // Return an empty string
+        }
+        return concat+baseString+concat; // Return a string surrounded by two other strings
     }
 
     /**
-     * Easy. Dog (case insensitive) goes in, you're good.
+     * Easy. Dog (case-insensitive) goes in, you're good.
      * Anything else but dog? That's not a dog.
      * @param betterBeDog String that better be a dog. Null strings are not dogs.
      * @throws NotADogException When someone is silly and doesn't put in a dog.
      */
+    String betterBeDog = "DOG";
     public void throwExceptionIfNotADog(String betterBeDog) throws NotADogException {
-        if (!betterBeDog.equals("dog")) {
+        if (!betterBeDog.equalsIgnoreCase("dog")) { // Ignore casing of string
             throw new NotADogException("This isn't a dog.");
         }
     }
@@ -52,10 +56,16 @@ public class Task1 {
      * @return A list of 10 Strings if base string is empty or has content. Otherwise, an empty list.
      */
     public List<String> returnsTheSameStringTenTimes(String baseString){
-        List<String> arrayList = new ArrayList<>();
-        while (arrayList.size()+1 != 10){
+
+        if (baseString == null) {
+            return new ArrayList<>();
+        }
+
+        List<String> arrayList = new ArrayList<>(); // Create list with capacity of 10 elements
+
+        while (arrayList.size() != 10){
             arrayList.add(baseString);
         }
-        return new ArrayList<>();
+        return arrayList; // Return list with string 10x
     }
 }
